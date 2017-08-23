@@ -8,11 +8,13 @@ import Colors from '../constants/Colors';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+//import NewsList Screen
+import NewsList from '../screens/news/NewsList';
 
 export default TabNavigator(
   {
-    Home: {
-      screen: HomeScreen,
+    News: {
+      screen: NewsList,
     },
     Links: {
       screen: LinksScreen,
@@ -27,9 +29,9 @@ export default TabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         switch (routeName) {
-          case 'Home':
+          case 'News':
             iconName = Platform.OS === 'ios'
-              ? `ios-information-circle${focused ? '' : '-outline'}`
+              ? `ios-list${focused ? '' : '-outline'}`
               : 'md-information-circle';
             break;
           case 'Links':
