@@ -9,12 +9,12 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 //import NewsList Screen
-import NewsList from '../screens/news/NewsList';
+import {NewsListWithData} from '../screens/news/NewsList';
 
 export default TabNavigator(
   {
     News: {
-      screen: NewsList,
+      screen: NewsListWithData,
     },
     Links: {
       screen: LinksScreen,

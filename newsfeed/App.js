@@ -1,8 +1,12 @@
+import 'expo';
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
+
+import {ApolloProvider} from 'react-apollo';
+import client from 'newsfeed/apollo/client.js';
 
 export default class App extends React.Component {
   state = {
@@ -22,7 +26,9 @@ export default class App extends React.Component {
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           {Platform.OS === 'android' &&
             <View style={styles.statusBarUnderlay} />}
-          <RootNavigation />
+          <ApolloProvider client={client}>
+            <RootNavigation />
+          </ApolloProvider>
         </View>
       );
     }
