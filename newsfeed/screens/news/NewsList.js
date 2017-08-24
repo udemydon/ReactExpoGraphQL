@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, ListView, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, Text, ListView, StyleSheet, ActivityIndicator, RefreshControl} from 'react-native';
 import gql from 'graphql-tag';
 import {graphql} from 'react-apollo';
 
@@ -16,8 +16,10 @@ class NewsList extends Component {
             rowHasChanged: (r1, r2) => r1.id !== r2.id
         });
   		this.state = {
-  			dataSource: ds.cloneWithRows([])
+  			dataSource: ds.cloneWithRows([]),
+  			refreshing: false
   		}
+  		this._onRefresh = this._onRefresh.bind(this);
   	}
 
   	componentWillReceiveProps(nextProps){
@@ -53,6 +55,12 @@ class NewsList extends Component {
 				dataSource={this.state.dataSource} 
 				renderRow={this._renderRow}
 				renderSeparator={this._renderSeparator}
+				refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this._onRefresh}
+                    />
+                }
 			/>	
 		)
 	}
@@ -69,6 +77,17 @@ class NewsList extends Component {
 		return (
 			<View style={styles.itemSeparator} />
 		)
+	}
+
+	_onRefresh(){
+		this.setState({
+            refreshing: true
+        })
+		this.props.data.refetch().then((items) => {
+			this.setState({
+            	refreshing: false
+        	})
+		})
 	}
 }
 
