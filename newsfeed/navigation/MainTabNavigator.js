@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
+import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
 
 import Colors from '../constants/Colors';
 
@@ -10,11 +10,32 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 //import NewsList Screen
 import {NewsListWithData} from '../screens/news/NewsList';
+import {NewsItemDetailWithData} from '../screens/news/NewsItemDetail';
+
+const NewsTab = StackNavigator({
+  NewsItems: {
+    screen: NewsListWithData,
+    path: '/',
+    navigationOptions: {
+      title: 'News',
+    },
+  },
+  NewsItemDetail: {
+    screen: NewsItemDetailWithData,
+    path: '/newsItem/:id',
+    navigationOptions: ({ navigation }) => ({
+      title: `News Detail`,
+    }),
+  },
+});
 
 export default TabNavigator(
   {
     News: {
-      screen: NewsListWithData,
+      screen: NewsTab,
+      navigationOptions: {
+        title: 'News'
+      }
     },
     Links: {
       screen: LinksScreen,

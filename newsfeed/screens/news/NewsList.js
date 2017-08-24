@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
-import {View, Text, ListView, StyleSheet, ActivityIndicator, RefreshControl} from 'react-native';
+import {View, Text, ListView, StyleSheet, ActivityIndicator, RefreshControl, TouchableOpacity} from 'react-native';
 import gql from 'graphql-tag';
 import {graphql} from 'react-apollo';
 
 //ES6
 class NewsList extends Component {
-
-	static navigationOptions = {
-    	title: 'News'
-  	};
 
   	constructor(props){
   		super(props);
@@ -20,6 +16,7 @@ class NewsList extends Component {
   			refreshing: false
   		}
   		this._onRefresh = this._onRefresh.bind(this);
+  		this._renderRow = this._renderRow.bind(this);
   	}
 
   	componentWillReceiveProps(nextProps){
@@ -37,7 +34,7 @@ class NewsList extends Component {
 		if (this.props.data.error) {       
             return (
                 <View style={styles.container}>
-                    <Text>Error occurred while showing the available Rules. Try again!</Text>
+                    <Text>Error occurred while showing the available News. Try again!</Text>
                 </View>
             );
         }
@@ -67,9 +64,9 @@ class NewsList extends Component {
 
 	_renderRow(newsItem){
 		return(
-			<View style={styles.itemContainer}>
+			<TouchableOpacity style={styles.itemContainer} onPress={this._goToNewsItemDetail.bind(this, newsItem)}>
 				<Text>{newsItem.title}</Text>
-			</View>	
+			</TouchableOpacity>	
 		)	
 	}
 
@@ -88,6 +85,10 @@ class NewsList extends Component {
             	refreshing: false
         	})
 		})
+	}
+
+	_goToNewsItemDetail(newsItem){
+		this.props.navigation.navigate("NewsItemDetail", {id: newsItem.id});
 	}
 }
 
@@ -110,6 +111,7 @@ const styles = StyleSheet.create({
 const NewsItemsQuery = gql`
 	query NewsItems {
 		allNewsItems {
+			id
 			title
 		}
 	}
