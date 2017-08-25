@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import {Text, View, ActivityIndicator, StyleSheet} from 'react-native';
+import {Text, View, ActivityIndicator, StyleSheet, WebView, Dimensions} from 'react-native';
 
 import gql from 'graphql-tag';
 import {graphql} from 'react-apollo';
+
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
 
 class NewsItemDetail extends Component{
 	render(){
@@ -22,9 +25,9 @@ class NewsItemDetail extends Component{
             );
         }
 		return (
-			<View style={{padding: 10}}>
-				<Text>{this.props.data.NewsItem.content}</Text>
-			</View>
+			
+				<WebView style={styles.webViewContainer} source={{html:this.props.data.NewsItem.contentHTML}} />
+	
 		)
 	}
 }
@@ -33,6 +36,7 @@ const NewsItemDetailQuery = gql`
 	query NewsItem ($id: ID!){
 		NewsItem (id: $id ) {
 			content
+			contentHTML
 		}
 	}
 `;
@@ -50,5 +54,11 @@ const styles = StyleSheet.create({
 		flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+	},
+	webViewContainer: {
+		flex: 1,
+		backgroundColor: '#fff',
+		height, 
+		width
 	}
 })
