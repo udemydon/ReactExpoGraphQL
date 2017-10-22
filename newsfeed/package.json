@@ -13,15 +13,15 @@
   },
   "dependencies": {
     "@expo/samples": "^2.0.2",
+    "expo": "^22.0.0",
+    "react": "16.0.0-beta.5",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-22.0.1.tar.gz",
+    "react-navigation": "^1.0.0-beta.12",
     "apollo-client": "^1.9.1",
-    "expo": "^20.0.0",
     "graphql-tag": "^2.4.2",
-    "react": "16.0.0-alpha.12",
-    "react-apollo": "^1.4.14",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-20.0.0.tar.gz",
-    "react-navigation": "^1.0.0-beta.12"
+    "react-apollo": "^1.4.14"
   },
   "devDependencies": {
-    "jest-expo": "^20.0.0"
+    "jest-expo": "^22.0.0"
   }
 }
