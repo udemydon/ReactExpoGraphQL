@@ -37,7 +37,7 @@ class NewsList extends Component {
 		if (this.props.data.error) {       
             return (
                 <View style={styles.container}>
-                    <Text>Error occurred while showing the available Rules. Try again!</Text>
+                    <Text>Error occurred while showing the available News. Try again!</Text>
                 </View>
             );
         }
