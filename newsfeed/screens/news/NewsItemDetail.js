@@ -36,7 +36,6 @@ const NewsItemDetailQuery = gql`
 	query NewsItem ($id: ID!){
 		NewsItem (id: $id ) {
 			content
-			contentHTML
 		}
 	}
 `;
