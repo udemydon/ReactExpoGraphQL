@@ -32,10 +32,11 @@ class NewsList extends Component {
   	}
 	
 	render(){
+		console.log("ERROR:", this.props.data.error);
 		if (this.props.data.error) {       
             return (
                 <View style={styles.container}>
-                    <Text>Error occurred while showing the available Rules. Try again!</Text>
+                    <Text>Error occurred while showing the available News. Try again!</Text>
                 </View>
             );
         }
@@ -54,7 +55,7 @@ class NewsList extends Component {
 				renderRow={this._renderRow}
 				renderSeparator={this._renderSeparator}
 			/>	
-		)
+		);
 	}
 
 	_renderRow(newsItem){
@@ -62,13 +63,13 @@ class NewsList extends Component {
 			<View style={styles.itemContainer}>
 				<Text>{newsItem.title}</Text>
 			</View>	
-		)	
+		);
 	}
 
 	_renderSeparator(){
 		return (
 			<View style={styles.itemSeparator} />
-		)
+		);
 	}
 }
 
